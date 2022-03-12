@@ -4,11 +4,11 @@ A Wordle bot with a few functions, all run from the integrate.R script.
 
 Data is pulled directly (although manually) from [NY Times Wordle](https://www.nytimes.com/games/wordle/index.html) source code, and has been updated since the NYTimes removed 'obscure' answers and 'rude' guesses.
 
-The bot is pretty good at Wordle. Performance is a touch below some of the best wordle bots available, but is still not bad. Current best strategy (starting with 'reast') averages 3.46 turns to finish, and never takes more than 5 turns.
+The bot is pretty good at Wordle. Performance is not as good as some of the best Wordle bots available, but is still not bad. Current best strategy (starting with 'reast') averages 3.46 turns to finish, and never takes more than 5 turns.
 
 All algorithm processing results have been saved for easy access. Processing is vectorised and quite fast, but are still non-trivial to run, especially the raw simulations.
 
-Finally, I think the algorithm could be improved by pushing more towards 'minimise expected turns' and away from 'maximise expected information'. The two are related but not perfectly so.
+The algorithm could probably be improved by pushing more towards 'minimise expected turns' and away from 'maximise expected information'. The two are related but not perfectly so.
 
 ### The WordleBot's fun tricks:
 
