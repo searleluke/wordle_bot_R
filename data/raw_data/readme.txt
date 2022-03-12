@@ -1,0 +1,1 @@
+a crude versioning method has been used here for when ny times updates the word list.
