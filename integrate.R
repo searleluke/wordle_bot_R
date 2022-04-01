@@ -15,6 +15,7 @@ source("functions/error_handling.R")
 source("functions/general_functions.R")
 source("functions/change_text_colours.R")
 source("functions/find_top_words.R")
+source("functions/automate_game.R")
 source("functions/cheat_at_wordle.R")
 
 
@@ -22,7 +23,12 @@ source("functions/cheat_at_wordle.R")
 
 # if you've played already today, have a go here if you want more
 
-play_wordle()
+play_wordle <- FALSE
+
+if(play_wordle){
+  play_wordle()  
+}
+
 
 
 # Processing --------------------------------------------------------------
@@ -134,13 +140,18 @@ if(check_simulation_results){
 
 # returns remaining words and suggested next guess
 
+tribble(
+  ~ guess, ~ answer,
+"bumph", "found"
+) %>%
 
+check_guess_set_goal_vector()
 
 tribble(
   ~guess, ~results,
-  "salet", "fhffh",  # Turn 1 guess and results. 
-  # "conia", "fpffh",  # Turn 2 guess and results. Comment out if on turn 1 still.
-  # "conia", "fpffh",  # Turn 3 guess and results. Comment out if on turn 2 still.
+  "roast", "fhfhp",  # Turn 1 guess and results. 
+  "punch", "fhhff",  # Turn 2 guess and results. Comment out if on turn 1 still.
+  # "bumph", "fhfff",  # Turn 3 guess and results. Comment out if on turn 2 still.
   # "conia", "fpffh",  # Turn 4 guess and results. Comment out if on turn 3 still.
   # "conia", "fpffh",  # Turn 5 guess and results. Comment out if on turn 4 still.
   ) %>% 
@@ -149,6 +160,33 @@ tribble(
 
 
 
+# logic errors: -----------------------------------------------------------
 
 
+# this highlights a logic error that needs investigating to improve the algorithm:
 
+# bot recommends 'aggry' even though one of the three remaining words gives full info?
+
+tribble(
+  ~guess, ~results,
+  "reast", "ffhff",  # Turn 1 guess and results. 
+  "colin", "fhpff",  # Turn 2 guess and results. Comment out if on turn 1 still.
+  # "putti", "fhfpf",  # Turn 3 guess and results. Comment out if on turn 2 still.
+  # "conia", "fpffh",  # Turn 4 guess and results. Comment out if on turn 3 still.
+  # "conia", "fpffh",  # Turn 5 guess and results. Comment out if on turn 4 still.
+) %>% 
+  cheat_at_wordle()
+
+
+# bot recommends 'adaws' even though any guess of the three would give full info
+
+
+tribble(
+  ~guess, ~results,
+  "reast", "fffff",  # Turn 1 guess and results. 
+  "colin", "fpffh",  # Turn 2 guess and results. Comment out if on turn 1 still.
+  "bumph", "fhfff",  # Turn 3 guess and results. Comment out if on turn 2 still.
+  # "conia", "fpffh",  # Turn 4 guess and results. Comment out if on turn 3 still.
+  # "conia", "fpffh",  # Turn 5 guess and results. Comment out if on turn 4 still.
+) %>% 
+  cheat_at_wordle()
